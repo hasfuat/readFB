@@ -15,8 +15,18 @@ public class rowArray2 {
 
 	public static void main(String[] args) throws FileNotFoundException,
 			IOException {
-		File file = new File(
-				"/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz");
+		String directory = "/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz";
+		readStreamBufferByBuffer(directory);
+
+	}
+
+	/**
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	private static void readStreamBufferByBuffer(String fileDirectory) throws IOException,
+			FileNotFoundException {
+		File file = new File(fileDirectory);
 
 		@SuppressWarnings("resource")
 		InputStream stream = new GZIPInputStream(new FileInputStream(file));
@@ -26,7 +36,7 @@ public class rowArray2 {
 		while (true) {
 
 			if (stream.available() <= 0)
-				break;
+				System.exit(0);
 			i++;
 			byte[] bs = new byte[4];
 
@@ -37,7 +47,7 @@ public class rowArray2 {
 
 			ByteBuffer bff2 = ByteBuffer.wrap(bs);
 			int position1 = bff2.getInt();
-			System.out.println(position1);
+			//System.out.println(position1);
 
 			byte[] bs2 = new byte[position1];
 
@@ -49,8 +59,7 @@ public class rowArray2 {
 			printData(bs2);
 
 		}
-		System.out.println("row no:" + (i + 1));
-
+		//System.out.println("row no:" + (i + 1));
 	}
 
 	/**
