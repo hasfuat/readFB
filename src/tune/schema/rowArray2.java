@@ -30,20 +30,20 @@ public class rowArray2 {
 
                // byte[] data = null;
                 //InputStream file =  new InputStream( new BufferReader(new File("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
-                DataInputStream stream = new DataInputStream(
-                	   new BufferedInputStream(new FileInputStream(new File("/home/fuat/Documentation/flatBuffer/rawLog"))));
+               // DataInputStream stream = new DataInputStream(
+                	  // new BufferedInputStream(new FileInputStream(new File("/home/fuat/Documentation/flatBuffer/rawLog"))));
                 
                
                 
                 
-               // GZIPInputStream stream =  new GZIPInputStream(new FileInputStream(file));
+               InputStream stream =  new GZIPInputStream(new FileInputStream(file));
                 
-               
+               //DataInputStream stream1 = (DataInputStream) stream;
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
                 //will change this loop later based on existing of stream.
                 int bytes = FILE_64_MBtoBytes;
                
-            for(int i = 0; i < 8; i++){   
+            for(int i = 0; i < 2; i++){   
                byte[] bs = new byte[4];
               // int offset3 = stream.readInt();
               // int c;
@@ -53,6 +53,7 @@ public class rowArray2 {
               // System.out.println(bff2.getInt());
                //int i = stream.read(bs);
                //System.out.println(data1+ "  " +i);
+               bff2.clear();
                int position1 = bff2.getInt() ;
                //int bufferSize = java.nio.ByteBuffer.wrap(bs).getShort();
               // System.out.println(bufferSize);
@@ -60,9 +61,9 @@ public class rowArray2 {
                
                byte[] bs2 = new byte[position1];
                
-               int data2 = stream.read(bs2,0, position1 );
+               stream.read(bs2,0, position1 );
                
-               //ByteBuffer bff3 = ByteBuffer.wrap(bs2);
+               ByteBuffer bff3 = ByteBuffer.wrap(bs2);
                
                printData(bs2);
                
@@ -159,5 +160,6 @@ public class rowArray2 {
 				+ rlog.clickCreated() + "  " + rlog.advertiserSubAdgroup()
 				+ " " + rlog.attributedIdDate());
 		//}
+		bb.clear();
 	}
 }
