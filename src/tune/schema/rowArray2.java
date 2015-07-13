@@ -33,7 +33,7 @@ public class rowArray2 {
                 
                 
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
-               
+            for(int i = 0; i < 8 ; i++){   
                byte[] bs = new byte[4];
               // int offset3 = stream.readInt();
               // int c;
@@ -53,7 +53,7 @@ public class rowArray2 {
                
                //ByteBuffer bff3 = ByteBuffer.wrap(bs2);
                printData(bs2);
-               
+            }   
               /* 
                for(byte b:bs)
                {
@@ -93,8 +93,8 @@ public class rowArray2 {
                 
     
              
-               arrayLength = data.length;
-               System.out.println(arrayLength);
+             //  arrayLength = data.length;
+               //System.out.println(arrayLength);
                
                //System.out.println(data.getClass().getName());
                //System.out.println(data[3]);
