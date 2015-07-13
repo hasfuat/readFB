@@ -1,6 +1,5 @@
 package tune.schema;
 
-
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
@@ -8,24 +7,21 @@ import java.io.*;
 
 import org.apache.commons.io.IOUtils;
 
-
-
-
-
 import org.apache.hadoop.fs.FSDataInputStream;
 
 import tune.schema.rawLog;
+
 //import com.google.flatbuffers.FlatBufferBuilder;
 
-public class rowArray2{
-	
-	
-   	static int initial_capacity ;
-   	static int position ;
-   	static int anotherCapacity ;
-   	static int arrayLength ;
-   	static int lengthTracker = 0;
-    public static void main(String[] args) throws FileNotFoundException, IOException{
+public class rowArray2 {
+
+	static int initial_capacity;
+	static int position;
+	static int anotherCapacity;
+	static int arrayLength;
+	static int lengthTracker = 0;
+
+	public static void main(String[] args) throws FileNotFoundException, IOException{
             byte[] data = null;
         //File file = new File("/home/fuat/Documentation/flatBuffer/rawLog2015032014.ral0");
 
@@ -39,13 +35,26 @@ public class rowArray2{
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
                
                byte[] bs = new byte[4];
-               int offset3 = stream.readInt();
-               int c;
+              // int offset3 = stream.readInt();
+              // int c;
                int data1 = stream.read(bs, 0, 4);
-               int i = stream.read(bs);
+               
+               ByteBuffer bff2 = ByteBuffer.wrap(bs);
+              // System.out.println(bff2.getInt());
+               //int i = stream.read(bs);
                //System.out.println(data1+ "  " +i);
+               int position1 = bff2.getInt() ;
+               //int bufferSize = java.nio.ByteBuffer.wrap(bs).getShort();
+              // System.out.println(bufferSize);
+               System.out.println(position1);
+               byte[] bs2 = new byte[position1];
                
+               int data2 = stream.read(bs2,0, position1 );
                
+               //ByteBuffer bff3 = ByteBuffer.wrap(bs2);
+               printData(bs2);
+               
+              /* 
                for(byte b:bs)
                {
                   // converts byte to int
@@ -55,16 +64,16 @@ public class rowArray2{
                   
                   // print
                   System.out.println(c);
-               } 
+               } */
                
                //System.out.println(data1);
-               System.out.println(stream.read());
+             //  System.out.println(stream.read());
               // byte[] readBuffer3 = Arrays.copyOf(stream, 4, offset3+4);
                 //System.out.println(50331716/8);
-                System.out.println(stream.readInt());
+              //  System.out.println(stream.readInt());
                // stream.read(stream, 0, 4);
                 
-                data= IOUtils.toByteArray(stream);
+             //   data= IOUtils.toByteArray(stream);
                 
                 //data = ByteStreams.toByteArray(file);
               /* System.out.println(data);
@@ -127,17 +136,13 @@ public class rowArray2{
 
 }
 
-    
-    
-    
- 	
-   
 	private static void printData(byte[] record) {
-		
-			ByteBuffer bb = ByteBuffer.wrap(record);
-			rawLog rlog = tune.schema.rawLog.getRootAsrawLog(bb);
-			System.out.println(rlog.advertiserId()+"  "+rlog.created()+" "+ rlog.clickCreated()+"  "+rlog.advertiserSubAdgroup()+" "+rlog.attributedIdDate());
-			
-			
+
+		ByteBuffer bb = ByteBuffer.wrap(record);
+		rawLog rlog = tune.schema.rawLog.getRootAsrawLog(bb);
+		System.out.println(rlog.advertiserId() + "  " + rlog.created() + " "
+				+ rlog.clickCreated() + "  " + rlog.advertiserSubAdgroup()
+				+ " " + rlog.attributedIdDate());
+
 	}
 }
