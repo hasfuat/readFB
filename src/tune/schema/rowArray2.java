@@ -30,13 +30,13 @@ public class rowArray2 {
 
                // byte[] data = null;
                 //InputStream file =  new InputStream( new BufferReader(new File("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
-                DataInputStream stream = new DataInputStream(
-                	  new BufferedInputStream(new FileInputStream(new File("rawLog"))));
+               // DataInputStream stream = new DataInputStream(
+                	  //new BufferedInputStream(new FileInputStream(new File("rawLog"))));
                 
                
                 
                 
-              // InputStream stream =  new GZIPInputStream(new FileInputStream(file));
+               InputStream stream =  new GZIPInputStream(new FileInputStream(file), 1024*1024);
                 
                //DataInputStream stream1 = (DataInputStream) stream;
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
