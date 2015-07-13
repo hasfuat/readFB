@@ -1,13 +1,15 @@
 package tune.schema;
 
+import google.flatbuffers.Constants;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.zip.GZIPInputStream;
 import java.io.*;
 
 import org.apache.commons.io.IOUtils;
-
 import org.apache.hadoop.fs.FSDataInputStream;
+import org.jets3t.service.io.GZipInflatingOutputStream;
 
 import tune.schema.rawLog;
 
@@ -20,10 +22,10 @@ public class rowArray2 {
 	static int anotherCapacity;
 	static int arrayLength;
 	static int lengthTracker = 0;
-
+	static int FILE_64_MBtoBytes = 64 * 1028; 
 	public static void main(String[] args) throws FileNotFoundException, IOException{
             byte[] data = null;
-        //File file = new File("/home/fuat/Documentation/flatBuffer/rawLog2015032014.ral0");
+        File file = new File("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz");
 
 
                // byte[] data = null;
@@ -31,13 +33,21 @@ public class rowArray2 {
                 DataInputStream stream = new DataInputStream(
                 	   new BufferedInputStream(new FileInputStream(new File("/home/fuat/Documentation/flatBuffer/rawLog"))));
                 
+               
                 
+                
+               // GZIPInputStream stream =  new GZIPInputStream(new FileInputStream(file));
+                
+               
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
-            for(int i = 0; i < 8 ; i++){   
+                //will change this loop later based on existing of stream.
+                int bytes = FILE_64_MBtoBytes;
+               
+            for(int i = 0; i < 8; i++){   
                byte[] bs = new byte[4];
               // int offset3 = stream.readInt();
               // int c;
-               int data1 = stream.read(bs, 0, 4);
+               stream.read(bs, 0, 4);
                
                ByteBuffer bff2 = ByteBuffer.wrap(bs);
               // System.out.println(bff2.getInt());
@@ -47,12 +57,16 @@ public class rowArray2 {
                //int bufferSize = java.nio.ByteBuffer.wrap(bs).getShort();
               // System.out.println(bufferSize);
                System.out.println(position1);
+               
                byte[] bs2 = new byte[position1];
                
                int data2 = stream.read(bs2,0, position1 );
                
                //ByteBuffer bff3 = ByteBuffer.wrap(bs2);
+               
                printData(bs2);
+               
+              // bytes = bytes - bs.length - bs2.length;
             }   
               /* 
                for(byte b:bs)
@@ -137,12 +151,13 @@ public class rowArray2 {
 }
 
 	private static void printData(byte[] record) {
-
+		
 		ByteBuffer bb = ByteBuffer.wrap(record);
+		//if(bb.hasRemaining()){
 		rawLog rlog = tune.schema.rawLog.getRootAsrawLog(bb);
 		System.out.println(rlog.advertiserId() + "  " + rlog.created() + " "
 				+ rlog.clickCreated() + "  " + rlog.advertiserSubAdgroup()
 				+ " " + rlog.attributedIdDate());
-
+		//}
 	}
 }
