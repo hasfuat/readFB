@@ -50,8 +50,20 @@ public class rowArray{
 
                 }*/
                
-               //data.length();
+               int length = data.length;
+               System.out.println(length);
                
+               System.out.println(data.getClass().getName());
+               //System.out.println(data[3]);
+               byte[] offset = Arrays.copyOfRange(data, 0, 4);
+               ByteBuffer bff = ByteBuffer.wrap(offset);
+               System.out.println(bff.getInt());
+               System.out.println(offset.length);
+               byte[] readBuffer = Arrays.copyOfRange(data, 4, 1448);
+               //ByteBuffer bff2 = ByteBuffer.wrap(readBuffer);
+               printData(readBuffer);
+               
+               //System.out.println(bff2.getInt());
               // data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInoutStream(file)));
               // byte[] newData = Arrays.copyOfRange(data, 0,100);// data.length);
 
