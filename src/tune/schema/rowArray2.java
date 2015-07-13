@@ -30,20 +30,20 @@ public class rowArray2 {
 
                // byte[] data = null;
                 //InputStream file =  new InputStream( new BufferReader(new File("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
-               // DataInputStream stream = new DataInputStream(
-                	  // new BufferedInputStream(new FileInputStream(new File("/home/fuat/Documentation/flatBuffer/rawLog"))));
+                DataInputStream stream = new DataInputStream(
+                	  new BufferedInputStream(new FileInputStream(new File("rawLog"))));
                 
                
                 
                 
-               InputStream stream =  new GZIPInputStream(new FileInputStream(file));
+              // InputStream stream =  new GZIPInputStream(new FileInputStream(file));
                 
                //DataInputStream stream1 = (DataInputStream) stream;
                 //data = IOUtils.toByteArray(new GZIPInputStream( new FSDataInputStream("/home/fuat/2015/03/21/shard14_20150321_rev0_prison00_batcher00_seq0.fb.gz")));
                 //will change this loop later based on existing of stream.
                 int bytes = FILE_64_MBtoBytes;
                
-            for(int i = 0; i < 2; i++){   
+            for(int i = 0; i < 8; i++){   
                byte[] bs = new byte[4];
               // int offset3 = stream.readInt();
               // int c;
